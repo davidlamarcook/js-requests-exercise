@@ -79,7 +79,7 @@ const ohMy = () => {
         let animals = res.data
         for (let i = 0; i < animals.length; i++) {
             const animalsNode = document.createElement('p')
-            animalsNode.innerText = animals[i]
+            animalsNode.innerHTML = animals[i]
             animalsContainer.appendChild(animalsNode)
         }
     })
@@ -134,7 +134,7 @@ document.querySelector('#repeat-button').addEventListener('click', repeatMyParam
 
 // CODE HERE
 let makeQueryRequest = () => {
-    axios.get('http://localhost:3000/query-test?lebron-james')
+    axios.get('http://localhost:3000/query-test?football&favoriteSport=basketball')
     .then(({ data }) => console.log(data))
 }
 
@@ -194,3 +194,14 @@ sendQueryBtn.addEventListener('click', makeQueryRequest);
 */
 
 // CODE HERE 
+
+const createFood = () => {
+    let foodInput = document.getElementById("foodInput")
+    let body = {
+        newFood: foodInput.value
+    }
+    axios.post(`http://localhost:3000/food`, body)
+    .then(({ data }) => {
+        console.log(data)
+    })
+}
