@@ -195,7 +195,8 @@ sendQueryBtn.addEventListener('click', makeQueryRequest);
 
 // CODE HERE 
 
-const createFood = () => {
+const createFood = (e) => {
+    e.preventDefault()
     let foodInput = document.getElementById("foodInput")
     let body = {
         newFood: foodInput.value
@@ -203,5 +204,15 @@ const createFood = () => {
     axios.post(`http://localhost:3000/food`, body)
     .then(({ data }) => {
         console.log(data)
+        let foodContainer = document.getElementById('foodContainer')
+        foodContainer.innerHTML = ''
+        data.forEach(item => {
+            let foodItem = document.createElement('li')
+            foodItem.textContent = item
+            foodContainer.appendChild(foodItem)
+        })
+        document.getElementById('foodInput').value = '' 
     })
 }
+
+document.querySelector("#addFoodBtn").addEventListener('click', createFood)
